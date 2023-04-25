@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cv id="CV-123">
+	<ident>
+		<nom>DESORBAIX</nom>
+		<pnom>Alexandre</pnom>
+		<pnom>Dominique</pnom>
+		<pnom>Joël</pnom>
+		<datenaiss>1984-08-03</datenaiss>
+		<langues>
+			<langue langName="FR" />
+			<langue langName="EN" />
+		</langues>
+	</ident>
+	<formations>
+		<formation obtenu="true">
+			<anneeDeb>2006</anneeDeb>
+			<anneeFin>2008</anneeFin>
+			<Intitule>BTS Informatique de gestion</Intitule>
+			<option>dev</option>
+		</formation>
+	</formations>
+</cv>
