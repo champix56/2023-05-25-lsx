@@ -1,0 +1,11 @@
+cvs
+{
+	color: tomato;
+}
+cv{
+	display:block;
+	border:1px solid black;
+	/*border-style:solid;
+	border-width:1px;
+	border-color:black;*/
+}
