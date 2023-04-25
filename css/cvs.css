@@ -1,6 +1,12 @@
+@media print{
+		
+	cvs{color:blue;}
+	cv{border:none !important;}
+}
+
 cvs
 {
-	color: black;
+	
 }
 cv{
 	width:210mm;
@@ -10,6 +16,10 @@ cv{
 	margin-right:auto;
 	margin-bottom:1cm;
 	padding:1cm;
+}
+langue:before{
+display:block;
+content:attr(langName);
 }
 ident{
 	width:10cm;
