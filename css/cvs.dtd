@@ -11,9 +11,9 @@
 >
 <!ELEMENT intitule (#PCDATA)>
 <!ELEMENT indent ((nom, pnom+, datenaiss, langues))>
-<!ELEMENT ident ((nom, ((prenom, datedenaiss) | (pnom+, datenaiss)), langues))>
+<!ELEMENT ident ((nom, pnom+, datenaiss, langues))>
 <!ELEMENT formations ((formation))>
-<!ELEMENT formation ((anneeDeb, anneeFin, (Intitule | intitule), option))>
+<!ELEMENT formation ((anneeDeb, anneeFin,  intitule, option))>
 <!ATTLIST formation
 	obtenu CDATA #REQUIRED
 >
