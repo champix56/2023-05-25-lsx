@@ -1,23 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE cv SYSTEM "genDtdForIdNameDemo.dtd">
-<cv id="CV-123">
-	<ident>
-		<nom>D€SORBAIX</nom>
-		<pnom>Alexandre</pnom>
-		<pnom>Dominique</pnom>
-		<pnom>Joël</pnom>
-		<datenaiss>1984-08-03</datenaiss>
-		<langues>
-			<langue langName="FR"/>
-			<langue langName="EN"/>
-		</langues>
-	</ident>
-	<formations>
-		<formation obtenu="true">
-			<anneeDeb>2006</anneeDeb>
-			<anneeFin>2008</anneeFin>
-			<Intitule>BTS Informatique de gestion</Intitule>
-			<option>dev</option>
-		</formation>
-	</formations>
-</cv>
+<!DOCTYPE cvs SYSTEM "genDtdForIdNameDemo.dtd">
+<cvs>
+	<cv id="CV-123">
+		<ident>
+			<nom>D€SORBAIX</nom>
+			<pnom>Alexandre</pnom>
+			<pnom>Dominique</pnom>
+			<pnom>Joël</pnom>
+			<datenaiss>1984-08-03</datenaiss>
+			<langues>
+				<langue langName="FR"/>
+				<langue langName="EN"/>
+			</langues>
+		</ident>
+		<formations>
+			<formation obtenu="true">
+				<anneeDeb>2006</anneeDeb>
+				<anneeFin>2008</anneeFin>
+				<Intitule>BTS Informatique de gestion</Intitule>
+				<option>dev</option>
+			</formation>
+		</formations>
+	</cv>
+	<cv id="CV-135">
+		<ident>
+			<nom>Grass</nom>
+			<prenom>Jérémy</prenom>
+			<datedenaiss>1995-05-08</datedenaiss>
+			<langues>
+				<langue langName="FR"/>
+				<langue langName="GE"/>
+			</langues>
+		</ident>
+		<formations>
+			<formation obtenu="true">
+				<anneeDeb>2006</anneeDeb>
+				<anneeFin>2008</anneeFin>
+				<intitule>BTS MachinChose</intitule>
+				<option>Mon option</option>
+			</formation>
+		</formations>
+	</cv>
+	<cv id="CV-124">
+		<ident>
+			<nom>L€GER</nom>
+			<pnom>François</pnom>
+			<pnom>Richard</pnom>
+			<datenaiss>1981-06-17</datenaiss>
+			<langues>
+				<langue langName="FR"/>
+				<langue langName="EN"/>
+			</langues>
+		</ident>
+		<formations>
+			<formation obtenu="true">
+				<anneeDeb>2001</anneeDeb>
+				<anneeFin>2004</anneeFin>
+				<Intitule>ESAT</Intitule>
+				<option>Design graphique</option>
+			</formation>
+		</formations>
+	</cv>
+</cvs>
