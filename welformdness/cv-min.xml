@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE cv SYSTEM "genDtdForIdNameDemo.dtd">
 <cv id="CV-123">
 	<ident>
-		<nom>DESORBAIX</nom>
+		<nom>D€SORBAIX</nom>
 		<pnom>Alexandre</pnom>
 		<pnom>Dominique</pnom>
 		<pnom>Joël</pnom>
 		<datenaiss>1984-08-03</datenaiss>
 		<langues>
-			<langue langName="FR" />
-			<langue langName="EN" />
+			<langue langName="FR"/>
+			<langue langName="EN"/>
 		</langues>
 	</ident>
 	<formations>
