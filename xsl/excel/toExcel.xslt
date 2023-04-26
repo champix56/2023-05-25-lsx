@@ -154,7 +154,7 @@
 				</Style>
 			</Styles>
 			<Worksheet ss:Name="Feuil1">
-				<Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="10" x:FullColumns="1" x:FullRows="1" ss:DefaultColumnWidth="62.400000000000006" ss:DefaultRowHeight="14.4">
+				<Table ss:ExpandedColumnCount="8" ss:ExpandedRowCount="{9 + count(//facture)}" x:FullColumns="1" x:FullRows="1" ss:DefaultColumnWidth="62.400000000000006" ss:DefaultRowHeight="14.4">
 					<Column ss:AutoFitWidth="0" ss:Width="18"/>
 					<Column ss:Index="3" ss:Width="112.2"/>
 					<Column ss:Index="6" ss:Width="64.8"/>
