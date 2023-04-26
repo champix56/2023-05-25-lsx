@@ -1,0 +1,6 @@
+type;date facture;idclient;montant total
+devis;2012-08-10;123;42.25
+facture;2012-09-04;234;74.63
+facture;2013-07-05;234;24.88
+devis;2012-07-04;234;69.65
+facture;2012-06-21;132;98.93
