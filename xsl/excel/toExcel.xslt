@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
 	<xsl:output method="xml" version="1.0" encoding="UTF-8" indent="yes"/>
 	<xsl:template match="/">
-	<!--gen en sortie d'une PI pour excel-->
+		<!--gen en sortie d'une PI pour excel-->
 		<xsl:processing-instruction name="mso-application">progid="Excel.Sheet"</xsl:processing-instruction>
 		<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40">
 			<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
@@ -161,7 +161,8 @@
 					<Column ss:Index="8" ss:AutoFitWidth="0" ss:Width="18.600000000000001"/>
 					<Row ss:Index="2" ss:Height="28.8">
 						<Cell ss:Index="2" ss:MergeAcross="5" ss:StyleID="s90">
-							<Data ss:Type="String">facture en date du :2023-01-01</Data>
+							<Data ss:Type="String">facture en date du :<xsl:value-of select="/factures/@dateeditionXML"/>
+							</Data>
 						</Cell>
 					</Row>
 					<Row ss:Index="4" ss:Height="21">
@@ -169,13 +170,17 @@
 							<Data ss:Type="String">Nombre de factures</Data>
 						</Cell>
 						<Cell ss:StyleID="s95">
-							<Data ss:Type="Number">1</Data>
+							<Data ss:Type="Number">
+								<xsl:value-of select="count(//facture[contains(@type,'acture')])"/>
+							</Data>
 						</Cell>
 						<Cell ss:MergeAcross="1" ss:StyleID="s63">
 							<Data ss:Type="String">Nombre de devis</Data>
 						</Cell>
 						<Cell ss:StyleID="s100">
-							<Data ss:Type="Number">2</Data>
+							<Data ss:Type="Number">
+								<xsl:value-of select="count(//facture[contains(@type,'evis')])"/>
+							</Data>
 						</Cell>
 					</Row>
 					<Row>
@@ -183,13 +188,17 @@
 							<Data ss:Type="String">Montant total des factures</Data>
 						</Cell>
 						<Cell>
-							<Data ss:Type="Number">3</Data>
+							<Data ss:Type="Number">
+								<xsl:value-of select="sum(//facture[contains(@type,'acture')]//stotligne)"/>
+							</Data>
 						</Cell>
 						<Cell ss:MergeAcross="1" ss:StyleID="s63">
 							<Data ss:Type="String">Montant toal des devis</Data>
 						</Cell>
 						<Cell>
-							<Data ss:Type="Number">4</Data>
+							<Data ss:Type="Number">
+								<xsl:value-of select="sum(//facture[contains(@type,'evis')]//stotligne)"/>
+							</Data>
 						</Cell>
 					</Row>
 					<Row ss:Height="15"/>
@@ -213,26 +222,7 @@
 							<Data ss:Type="String">nbArticle</Data>
 						</Cell>
 					</Row>
-					<Row ss:Height="15">
-						<Cell ss:Index="2" ss:StyleID="s81">
-							<Data ss:Type="Number">1</Data>
-						</Cell>
-						<Cell ss:StyleID="s79">
-							<Data ss:Type="DateTime">2023-01-01T00:00:00.000</Data>
-						</Cell>
-						<Cell ss:StyleID="s82">
-							<Data ss:Type="Number">123</Data>
-						</Cell>
-						<Cell ss:StyleID="s82">
-							<Data ss:Type="String">Facture</Data>
-						</Cell>
-						<Cell ss:StyleID="s80">
-							<Data ss:Type="Number">678.01</Data>
-						</Cell>
-						<Cell ss:StyleID="s72">
-							<Data ss:Type="Number">5</Data>
-						</Cell>
-					</Row>
+					<xsl:apply-templates select="//facture"/>
 					<Row ss:Height="21.599999999999998">
 						<Cell ss:Index="2" ss:StyleID="s77"/>
 						<Cell ss:StyleID="s113"/>
@@ -272,5 +262,27 @@
 				</WorksheetOptions>
 			</Worksheet>
 		</Workbook>
+	</xsl:template>
+	<xsl:template match="facture">
+		<Row ss:Height="15">
+			<Cell ss:Index="2" ss:StyleID="s81">
+				<Data ss:Type="Number"><xsl:value-of select="position()"/></Data>
+			</Cell>
+			<Cell ss:StyleID="s79">
+				<Data ss:Type="DateTime"><xsl:value-of select="@datefacture"/>T00:00:00.000</Data>
+			</Cell>
+			<Cell ss:StyleID="s82">
+				<Data ss:Type="Number"><xsl:value-of select="@idclient"/></Data>
+			</Cell>
+			<Cell ss:StyleID="s82">
+				<Data ss:Type="String"><xsl:value-of select="translate(@type,'fd','FD')"/></Data>
+			</Cell>
+			<Cell ss:StyleID="s80">
+				<Data ss:Type="Number"><xsl:value-of select="sum(.//stotligne)"/></Data>
+			</Cell>
+			<Cell ss:StyleID="s72">
+				<Data ss:Type="Number"><xsl:value-of select="count(.//ligne)"/></Data>
+			</Cell>
+		</Row>
 	</xsl:template>
 </xsl:stylesheet>
