@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factures>
+	<facture date="2012-08-10">
+		<ligneAvg>14.08333333333333</ligneAvg>
+		<artAvg>8.28333333333333</artAvg>
+		<nbLignes>3</nbLignes>
+	</facture>
+	<facture date="2012-09-04">
+		<ligneAvg>74.625</ligneAvg>
+		<artAvg>9.95</artAvg>
+		<nbLignes>1</nbLignes>
+	</facture>
+	<facture date="2013-07-05">
+		<ligneAvg>24.875</ligneAvg>
+		<artAvg>9.95</artAvg>
+		<nbLignes>1</nbLignes>
+	</facture>
+	<facture date="2012-07-04">
+		<ligneAvg>69.65</ligneAvg>
+		<artAvg>9.95</artAvg>
+		<nbLignes>1</nbLignes>
+	</facture>
+	<facture date="2012-06-21">
+		<ligneAvg>32.975</ligneAvg>
+		<artAvg>7.61666666666667</artAvg>
+		<nbLignes>3</nbLignes>
+	</facture>
+</factures>
