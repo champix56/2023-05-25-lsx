@@ -229,11 +229,11 @@
 						<Cell ss:MergeAcross="1" ss:StyleID="m456939296">
 							<Data ss:Type="String">Total contenu :</Data>
 						</Cell>
-						<Cell ss:StyleID="s105" ss:Formula="=SUM(R[-1]C:R[-1]C)">
-							<Data ss:Type="Number">678.01</Data>
+						<Cell ss:StyleID="s105" ss:Formula="=SUM(R[-1]C:R[-{count(//facture)}]C)">
+							<Data ss:Type="Number"><xsl:value-of select="sum(//stotligne)"/></Data>
 						</Cell>
-						<Cell ss:StyleID="s76" ss:Formula="=SUM(R[-1]C:R[-1]C)">
-							<Data ss:Type="Number">5</Data>
+						<Cell ss:StyleID="s76" ss:Formula="=SUM(R[-1]C:R[-{count(//facture)}]C)">
+							<Data ss:Type="Number"><xsl:value-of select="count(//ligne)"/></Data>
 						</Cell>
 					</Row>
 					<Row ss:Height="15"/>
