@@ -119,9 +119,12 @@
 			<!--preservation du context du template-->
 			<xsl:value-of select="../@adr1ets"/>
 			<br/>
-			<!--sans preservation du context passage par noeud racine-->
-			<xsl:value-of select="/factures/@adr2ets"/>
-			<br/>
+			<!--un seum cas a traiter pas de cas contraire (pas de else if ou de else sinon usage de choose/when/otherwise)-->
+			<xsl:if test="string-length(/factures/@adr2ets)>0">
+				<!--sans preservation du context passage par noeud racine-->
+				<xsl:value-of select="/factures/@adr2ets"/>
+				<br/>
+			</xsl:if>
 			<!--usage d'entity ou de xsl:text (les espaces de xsl text seront normalisées par html à l'etape d'affichage-->
 			<xsl:value-of select="/factures/@cpets"/>&nbsp;<xsl:value-of select="/factures/@villeets"/>
 		</div>
