@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xsl:stylesheet [
+	<!ENTITY nbsp "&#xA0;">
+	<!ENTITY euro "&#x20ac;">
+	<!ENTITY signature "DESORBAIX Alexandre">
+]>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="html" encoding="UTF-8" indent="yes" omit-xml-declaration="yes"/>
 	<xsl:template match="/">
 		<html>
 			<head>
-				<title>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/></title>
+				<title>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/>
+				</title>
 				<style type="text/css">
 						.facture{
 							width:200mm;
@@ -24,6 +30,7 @@
 						.expediteur,.destinataire{
 							width:8cm;
 							height:3cm;
+							padding:5mm;
 							border:1px solid black;
 						}
 						.expediteur{
@@ -42,7 +49,8 @@
 				</style>
 			</head>
 			<body>
-				<h1>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/></h1>
+				<h1>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/>
+				</h1>
 				<hr/>
 				<xsl:apply-templates select="//facture"/>
 			</body>
@@ -50,9 +58,10 @@
 	</xsl:template>
 	<xsl:template match="facture">
 		<div class="facture" id="facture-{@numfacture}">
-			<div class="expediteur">expediteur</div>
-			<div class="destinataire">destinataire</div>
-			<div class="numerofacture">Facture N°XX</div>
+			<!--selection du noeud sans preservation de context pour declenchement du rendu de @rsets-->
+			<xsl:apply-templates select="/factures/@rsets"/>
+			<div class="destinataire">&signature;</div>
+			<xsl:apply-templates select="@numfacture"/>
 			<table>
 				<thead>
 					<tr>
@@ -63,7 +72,11 @@
 						<th>S-total</th>
 					</tr>
 				</thead>
-				<tbody><tr><th></th></tr></tbody>
+				<tbody>
+					<tr>
+						<th/>
+					</tr>
+				</tbody>
 				<tfoot>
 					<tr>
 						<th colspan="4">Montant HT</th>
@@ -79,7 +92,25 @@
 					</tr>
 				</tfoot>
 			</table>
-		
+		</div>
+	</xsl:template>
+	<xsl:template match="@numfacture">
+		<div class="numerofacture">
+			<xsl:value-of select="translate(../@type,'fd','FD')"/> N°<xsl:value-of select="."/>
+		</div>
+	</xsl:template>
+	<xsl:template match="@rsets">
+		<div class="expediteur">
+			<xsl:value-of select="."/>
+			<br/>
+			<!--preservation du context du template-->
+			<xsl:value-of select="../@adr1ets"/>
+			<br/>
+			<!--sans preservation du context passage par noeud racine-->
+			<xsl:value-of select="/factures/@adr2ets"/>
+			<br/>
+			<!--usage d'entity ou de xsl:text (les espaces de xsl text seront normalisées par html à l'etape d'affichage-->
+			<xsl:value-of select="/factures/@cpets"/>&nbsp;<xsl:value-of select="/factures/@villeets"/>
 		</div>
 	</xsl:template>
 </xsl:stylesheet>
