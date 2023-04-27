@@ -88,7 +88,15 @@
 			<tbody>
 				<xsl:apply-templates select="ligne"/>
 			</tbody>
-			<xsl:call-template name="total-facture"/>
+			<xsl:call-template name="total-facture">
+				<xsl:with-param name="nodesStotligne">
+					<xsl:for-each select="ligne">
+						<ligne>
+							<stotligne><xsl:value-of select="round(stotligne*100) div 100"/></stotligne>
+						</ligne>
+					</xsl:for-each>
+				</xsl:with-param>
+			</xsl:call-template>
 		</table>
 	</xsl:template>
 	<xsl:template match="ligne">
@@ -114,7 +122,7 @@
 	</xsl:template>
 	<!--declarer apres ligne/* car priority de match similaire, il est possible grace à @priority de le declarer avant et elever la priority-->
 	<xsl:template match="ligne/phtByUnit | ligne/stotligne">
-		<td><xsl:value-of select="format-number(.,'0.00€')"/></td>
+		<td><xsl:value-of select="format-number(round(.*100) div 100,'0.00€')"/></td>
 	</xsl:template>
 	<!--	<xsl:template match="@type[contains(.''acture)]"></xsl:template>
 	<xsl:template match="@type"></xsl:template>-->
@@ -144,8 +152,9 @@
 	</xsl:template>
 	<xsl:decimal-format name="euro-curr" decimal-separator=","	grouping-separator=" "/>
 	<xsl:template name="total-facture">
+		<xsl:param name="nodesStotligne" select=".//ligne"/>
 		<tfoot>
-				<xsl:variable name="pht" select="round(sum(.//stotligne)*100) div 100"/>
+				<xsl:variable name="pht" select="round(sum($nodesStotligne//stotligne)*100) div 100"/>
 				<xsl:variable name="ptva" select="round($pht *0.20*100) div 100"/>
 				<tr>
 					<th colspan="4">Montant HT</th>
