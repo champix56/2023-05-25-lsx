@@ -6,10 +6,37 @@
 			<head>
 				<title>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/></title>
 				<style type="text/css">
-						.facture{}
-						.numerofacture{}
-						.expediteur{}
-						.destinataire{}
+						.facture{
+							width:200mm;
+							height:287mm;
+							border:1px solid black;
+							margin-left:auto;
+							margin-right:auto;
+							page-break-before:always;
+						}
+						.numerofacture{
+							width:12cm;
+							margin-left:4cm;
+							margin-right:4cm;
+							text-align:center;
+							border:2px solid black;
+						}
+						.expediteur,.destinataire{
+							width:8cm;
+							height:3cm;
+							border:1px solid black;
+						}
+						.expediteur{
+							margin-top:2cm;
+							margin-left:1cm;
+						}
+						.destinataire{
+							margin-top:3cm;
+							margin-bottom:1.5cm;
+							margin-left:11cm;
+						}
+						table{width:18cm;margin-left:1cm;margin-top:1.5cm;}
+						thead th{background-color:#DFDFDF;}
 						h1{color :blue;}
 						#facture-8{}
 				</style>
@@ -36,11 +63,7 @@
 						<th>S-total</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<th></th>
-					</tr>
-				</tbody>
+				<tbody><tr><th></th></tr></tbody>
 				<tfoot>
 					<tr>
 						<th colspan="4">Montant HT</th>
