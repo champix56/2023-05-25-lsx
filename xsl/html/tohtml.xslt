@@ -52,6 +52,9 @@
 			</head>
 			<body>
 				<h1>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/></h1>
+				<ul>
+					<xsl:apply-templates select="//facture" mode="toc"/>
+				</ul>
 				<table>
 					<tbody>
 						<tr>
@@ -59,12 +62,15 @@
 						</tr>
 					</tbody>
 					<xsl:call-template name="total-facture"/>
-				</table>
+				</table>	
 				<hr/>
 				<xsl:apply-templates select="//facture"/>
 			</body>
 		</html>
 	</xsl:template>
+	<xsl:template match="facture" mode="toc">
+		<li><a href="#facture-{@numfacture}"><xsl:value-of select="translate(@type,'fd','FD')"/> n°<xsl:value-of select="@numfacture"/></a></li>
+	</xsl:template>	
 	<xsl:template match="facture">
 		<div class="facture" id="facture-{@numfacture}">
 			<!--selection du noeud sans preservation de context pour declenchement du rendu de @rsets-->
