@@ -7,6 +7,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="html" encoding="UTF-8" indent="yes" omit-xml-declaration="yes"/>
 	<xsl:param name="tva" select="0.2"/>
+	<!--<xsl:variable name="docClient" select="document('../clients.xml')"/>-->
 	<xsl:template match="/">
 		<html>
 			<head>
@@ -78,9 +79,19 @@
 		<div class="facture" id="facture-{@numfacture}">
 			<!--selection du noeud sans preservation de context pour declenchement du rendu de @rsets-->
 			<xsl:apply-templates select="/factures/@rsets"/>
-			<div class="destinataire">&signature;</div>
+			<xsl:variable name="idc" select="@idclient"/>
+			<xsl:variable name="factureClient" select="document('../clients.xml')/clients/client[@id=$idc]"/>
+			<xsl:apply-templates select="$factureClient"/>
 			<xsl:apply-templates select="@numfacture"/>
 			<xsl:apply-templates select="lignes"/>
+		</div>
+	</xsl:template>
+	<xsl:template match="clients/client">
+		<div class="destinataire">
+				<xsl:value-of select="destinataire"/><br/>
+				<xsl:value-of select="adr1"/><br/>
+				<xsl:value-of select="adr2"/><br/>
+				<xsl:value-of select="cp"/>&nbsp;<xsl:value-of select="ville"/><br/>
 		</div>
 	</xsl:template>
 	<xsl:template match="lignes">
