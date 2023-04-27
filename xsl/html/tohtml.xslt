@@ -45,6 +45,8 @@
 						table{width:18cm;margin-left:1cm;margin-top:1.5cm;}
 						thead th{background-color:#DFDFDF;}
 						h1{color :blue;}
+						.green{color:green;}
+						.blue{color:skyblue;}
 						#facture-8{}
 				</style>
 			</head>
@@ -94,8 +96,19 @@
 			</table>
 		</div>
 	</xsl:template>
+<!--	<xsl:template match="@type[contains(.''acture)]"></xsl:template>
+	<xsl:template match="@type"></xsl:template>-->
 	<xsl:template match="@numfacture">
-		<div class="numerofacture">
+		<div>
+		<!--construction dynamique de la valeur de l'attribut de sortie class-->
+			<xsl:attribute name="class">numerofacture<xsl:choose>
+				<xsl:when test="contains(../@type,'acture')"> blue</xsl:when>
+				<!--2 eme cas possible-->
+				<xsl:when test="contains(../@type,'nc')"> nc</xsl:when>
+				<!--cas par defaut-->
+				<xsl:otherwise> green</xsl:otherwise>
+			</xsl:choose>
+			</xsl:attribute>
 			<xsl:value-of select="translate(../@type,'fd','FD')"/> N°<xsl:value-of select="."/>
 		</div>
 	</xsl:template>
