@@ -118,6 +118,7 @@
 	<xsl:template match="ligne/*">
 		<td><xsl:value-of select="."/></td>
 	</xsl:template>
+	<!--declarer apres ligne/* car priority de match similaire, il est possible grace à @priority de le declarer avant et elever la priority-->
 	<xsl:template match="ligne/phtByUnit | ligne/stotligne">
 		<td><xsl:value-of select="format-number(.,'# ##0.00&euro;')"/></td>
 	</xsl:template>
