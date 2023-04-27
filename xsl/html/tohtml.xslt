@@ -10,12 +10,33 @@
 						.numerofacture{}
 						.expediteur{}
 						.destinataire{}
+						h1{color :blue;}
+						#facture-8{}
 				</style>
 			</head>
 			<body>
 				<h1>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/></h1>
 				<hr/>
+				<xsl:apply-templates select="//facture"/>
 			</body>
 		</html>
+	</xsl:template>
+	<xsl:template match="facture">
+		<div class="facture" id="facture-{@numfacture}">
+			<div class="expediteur">expediteur</div>
+			<div class="destinataire">destinataire</div>
+			<div class="numerofacture">Facture N°XX</div>
+			<table>
+				<thead>
+					<tr>
+						<th>ref</th>
+						<th>designation</th>
+						<th>Quant.</th>
+						<th>S-total</th>
+					</tr>
+				</thead>
+			</table>
+		
+		</div>
 	</xsl:template>
 </xsl:stylesheet>
