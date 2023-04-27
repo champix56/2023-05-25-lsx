@@ -64,51 +64,61 @@
 			<xsl:apply-templates select="/factures/@rsets"/>
 			<div class="destinataire">&signature;</div>
 			<xsl:apply-templates select="@numfacture"/>
-			<table>
-				<thead>
-					<tr>
-						<th>ref</th>
-						<th>designation</th>
-						<th>€/Unit.</th>
-						<th>Quant.</th>
-						<th>S-total</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<th/>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<th colspan="4">Montant HT</th>
-						<th>XXX.XX€</th>
-					</tr>
-					<tr>
-						<th colspan="4">Montant TVA</th>
-						<th>XXX.XX€</th>
-					</tr>
-					<tr>
-						<th colspan="4">Montant TTC</th>
-						<th>XXX.XX€</th>
-					</tr>
-				</tfoot>
-			</table>
+			<xsl:apply-templates select="lignes"/>
 		</div>
 	</xsl:template>
-<!--	<xsl:template match="@type[contains(.''acture)]"></xsl:template>
+	<xsl:template match="lignes">
+		<table>
+			<thead>
+				<tr>
+					<th>ref</th>
+					<th>designation</th>
+					<th>€/Unit.</th>
+					<th>Quant.</th>
+					<th>S-total</th>
+				</tr>
+			</thead>
+			<tbody>
+				<xsl:apply-templates select="ligne"/>
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="4">Montant HT</th>
+					<th>XXX.XX€</th>
+				</tr>
+				<tr>
+					<th colspan="4">Montant TVA</th>
+					<th>XXX.XX€</th>
+				</tr>
+				<tr>
+					<th colspan="4">Montant TTC</th>
+					<th>XXX.XX€</th>
+				</tr>
+			</tfoot>
+		</table>
+	</xsl:template>
+	<xsl:template match="ligne">
+		<tr>
+		<!--class conditionnel pair/impair pour gestion couleur de fond un sur deux en css-->
+			<xsl:attribute name="class">
+				<xsl:choose>
+					<xsl:when test="position() mod 2 = 0">ligne-blue</xsl:when>
+					<xsl:otherwise>ligne-grey</xsl:otherwise>
+				</xsl:choose>
+			</xsl:attribute>
+			<td><xsl:value-of select="ref"/></td>
+			<td><xsl:value-of select="designation"/></td>
+			<td><xsl:value-of select="nbUnit"/></td>
+			<td><xsl:value-of select="phtByUnit"/></td>
+			<td><xsl:value-of select="stotligne"/></td>
+		</tr>
+	</xsl:template>
+	<!--	<xsl:template match="@type[contains(.''acture)]"></xsl:template>
 	<xsl:template match="@type"></xsl:template>-->
 	<xsl:template match="@numfacture">
 		<div>
-		<!--construction dynamique de la valeur de l'attribut de sortie class-->
-			<xsl:attribute name="class">numerofacture<xsl:choose>
-				<xsl:when test="contains(../@type,'acture')"> blue</xsl:when>
-				<!--2 eme cas possible-->
-				<xsl:when test="contains(../@type,'nc')"> nc</xsl:when>
-				<!--cas par defaut-->
-				<xsl:otherwise> green</xsl:otherwise>
-			</xsl:choose>
-			</xsl:attribute>
+			<!--construction dynamique de la valeur de l'attribut de sortie class-->
+			<xsl:attribute name="class">numerofacture<xsl:choose><xsl:when test="contains(../@type,'acture')"> blue</xsl:when><!--2 eme cas possible--><xsl:when test="contains(../@type,'nc')"> nc</xsl:when><!--cas par defaut--><xsl:otherwise> green</xsl:otherwise></xsl:choose></xsl:attribute>
 			<xsl:value-of select="translate(../@type,'fd','FD')"/> N°<xsl:value-of select="."/>
 		</div>
 	</xsl:template>
