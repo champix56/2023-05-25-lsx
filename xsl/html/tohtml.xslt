@@ -47,11 +47,13 @@
 						h1{color :blue;}
 						.green{color:green;}
 						.blue{color:skyblue;}
+						li{display:inline;padding : 5px;}
 						#facture-8{}
 				</style>
 			</head>
 			<body>
 				<h1>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/></h1>
+				<h3>Liste des factures :</h3>
 				<ul>
 					<xsl:apply-templates select="//facture" mode="toc"/>
 				</ul>
