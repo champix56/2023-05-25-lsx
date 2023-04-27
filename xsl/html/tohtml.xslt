@@ -118,6 +118,9 @@
 	<xsl:template match="ligne/*">
 		<td><xsl:value-of select="."/></td>
 	</xsl:template>
+	<xsl:template match="ligne/phtByUnit | ligne/stotligne">
+		<td><xsl:value-of select="format-number(.,'# ##0.00&euro;')"/></td>
+	</xsl:template>
 	<!--	<xsl:template match="@type[contains(.''acture)]"></xsl:template>
 	<xsl:template match="@type"></xsl:template>-->
 	<xsl:template match="@numfacture">
