@@ -106,12 +106,17 @@
 					<xsl:otherwise>ligne-grey</xsl:otherwise>
 				</xsl:choose>
 			</xsl:attribute>
-			<td><xsl:value-of select="ref"/></td>
-			<td><xsl:value-of select="designation"/></td>
-			<td><xsl:value-of select="nbUnit"/></td>
-			<td><xsl:value-of select="phtByUnit"/></td>
-			<td><xsl:value-of select="stotligne"/></td>
+			<xsl:apply-templates select="*"/>
 		</tr>
+	</xsl:template>
+	<!--
+		template pour effectuer une NON presentation du noeud cible mais déclencher lors du apply
+		ELEVATION DE PRIOTITY pour eviter que ce noeud declenche le template en dessous qui a la meme priorité de match
+	-->
+	<xsl:template match="ligne/surface" priority="2" />
+	<!--traitement generique d'un enfant de ligne-->
+	<xsl:template match="ligne/*">
+		<td><xsl:value-of select="."/></td>
 	</xsl:template>
 	<!--	<xsl:template match="@type[contains(.''acture)]"></xsl:template>
 	<xsl:template match="@type"></xsl:template>-->
