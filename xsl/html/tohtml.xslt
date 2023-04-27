@@ -51,8 +51,15 @@
 				</style>
 			</head>
 			<body>
-				<h1>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/>
-				</h1>
+				<h1>Factures en date du : <xsl:value-of select="factures/@dateeditionXML"/></h1>
+				<table>
+					<tbody>
+						<tr>
+							<th></th>
+						</tr>
+					</tbody>
+					<xsl:call-template name="total-facture"/>
+				</table>
 				<hr/>
 				<xsl:apply-templates select="//facture"/>
 			</body>
@@ -81,20 +88,7 @@
 			<tbody>
 				<xsl:apply-templates select="ligne"/>
 			</tbody>
-			<tfoot>
-				<tr>
-					<th colspan="4">Montant HT</th>
-					<th>XXX.XX€</th>
-				</tr>
-				<tr>
-					<th colspan="4">Montant TVA</th>
-					<th>XXX.XX€</th>
-				</tr>
-				<tr>
-					<th colspan="4">Montant TTC</th>
-					<th>XXX.XX€</th>
-				</tr>
-			</tfoot>
+			<xsl:call-template name="total-facture"/>
 		</table>
 	</xsl:template>
 	<xsl:template match="ligne">
@@ -120,7 +114,7 @@
 	</xsl:template>
 	<!--declarer apres ligne/* car priority de match similaire, il est possible grace à @priority de le declarer avant et elever la priority-->
 	<xsl:template match="ligne/phtByUnit | ligne/stotligne">
-		<td><xsl:value-of select="format-number(.,'# ##0.00&euro;')"/></td>
+		<td><xsl:value-of select="format-number(.,'0.00€')"/></td>
 	</xsl:template>
 	<!--	<xsl:template match="@type[contains(.''acture)]"></xsl:template>
 	<xsl:template match="@type"></xsl:template>-->
@@ -147,5 +141,22 @@
 			<!--usage d'entity ou de xsl:text (les espaces de xsl text seront normalisées par html à l'etape d'affichage-->
 			<xsl:value-of select="/factures/@cpets"/>&nbsp;<xsl:value-of select="/factures/@villeets"/>
 		</div>
+	</xsl:template>
+	<xsl:template name="total-facture">
+		<tfoot>
+				<tr>
+					<th colspan="4">Montant HT</th>
+					<!--attention a l'arrondi a gerrer-->
+					<th><xsl:value-of select="round(sum(.//stotligne)*100) div 100"/></th>
+				</tr>
+				<tr>
+					<th colspan="4">Montant TVA</th>
+					<th>XXX.XX€</th>
+				</tr>
+				<tr>
+					<th colspan="4">Montant TTC</th>
+					<th>XXX.XX€</th>
+				</tr>
+			</tfoot>
 	</xsl:template>
 </xsl:stylesheet>
