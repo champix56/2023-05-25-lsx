@@ -6,6 +6,7 @@
 ]>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<xsl:output method="html" encoding="UTF-8" indent="yes" omit-xml-declaration="yes"/>
+	<xsl:param name="tva" select="0.2"/>
 	<xsl:template match="/">
 		<html>
 			<head>
@@ -163,7 +164,7 @@
 		<xsl:param name="nodesStotligne" select=".//ligne"/>
 		<tfoot>
 				<xsl:variable name="pht" select="round(sum($nodesStotligne//stotligne)*100) div 100"/>
-				<xsl:variable name="ptva" select="round($pht *0.20*100) div 100"/>
+				<xsl:variable name="ptva" select="round($pht *$tva*100) div 100"/>
 				<tr>
 					<th colspan="4">Montant HT</th>
 					<!--attention a l'arrondi a gerrer-->
