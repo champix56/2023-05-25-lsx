@@ -142,20 +142,23 @@
 			<xsl:value-of select="/factures/@cpets"/>&nbsp;<xsl:value-of select="/factures/@villeets"/>
 		</div>
 	</xsl:template>
+	<xsl:decimal-format name="euro-curr" decimal-separator=","	grouping-separator=" "/>
 	<xsl:template name="total-facture">
 		<tfoot>
+				<xsl:variable name="pht" select="round(sum(.//stotligne)*100) div 100"/>
+				<xsl:variable name="ptva" select="round($pht *0.20*100) div 100"/>
 				<tr>
 					<th colspan="4">Montant HT</th>
 					<!--attention a l'arrondi a gerrer-->
-					<th><xsl:value-of select="round(sum(.//stotligne)*100) div 100"/></th>
+					<th><xsl:value-of select="format-number($pht,'0,00€','euro-curr')"/></th>
 				</tr>
 				<tr>
 					<th colspan="4">Montant TVA</th>
-					<th>XXX.XX€</th>
+						<th><xsl:value-of select="format-number($ptva,'0,00€','euro-curr')"/></th>
 				</tr>
 				<tr>
 					<th colspan="4">Montant TTC</th>
-					<th>XXX.XX€</th>
+					<th><xsl:value-of select="format-number($pht+$ptva,'0,00€','euro-curr')"/></th>
 				</tr>
 			</tfoot>
 	</xsl:template>
