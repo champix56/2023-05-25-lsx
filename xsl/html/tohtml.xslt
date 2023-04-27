@@ -31,10 +31,30 @@
 					<tr>
 						<th>ref</th>
 						<th>designation</th>
+						<th>€/Unit.</th>
 						<th>Quant.</th>
 						<th>S-total</th>
 					</tr>
 				</thead>
+				<tbody>
+					<tr>
+						<th></th>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<th colspan="4">Montant HT</th>
+						<th>XXX.XX€</th>
+					</tr>
+					<tr>
+						<th colspan="4">Montant TVA</th>
+						<th>XXX.XX€</th>
+					</tr>
+					<tr>
+						<th colspan="4">Montant TTC</th>
+						<th>XXX.XX€</th>
+					</tr>
+				</tfoot>
 			</table>
 		
 		</div>
