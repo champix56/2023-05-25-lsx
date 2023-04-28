@@ -1,1 +1,3 @@
 spec XML 1.0 : https://www.w3.org/TR/2004/REC-xml-20040204/#sec-starttags
+
+exemple svg : https://champix56.github.io/react-graphical-ui/
