@@ -5,7 +5,7 @@
 		<xsl:attribute name="padding-top">1cm</xsl:attribute>
 	</xsl:attribute-set>
 	<xsl:attribute-set name="imageSize">
-		<xsl:attribute name="content-weight">98mm</xsl:attribute>
+		<xsl:attribute name="content-width">98mm</xsl:attribute>
 		<xsl:attribute name="content-height">98mm</xsl:attribute>
 	</xsl:attribute-set>
 	<xsl:attribute-set name="breakPageBefore">
