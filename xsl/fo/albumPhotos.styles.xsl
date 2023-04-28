@@ -18,4 +18,11 @@
 	<xsl:attribute-set name="underline">
 		<xsl:attribute name="text-decoration">underline</xsl:attribute>
 	</xsl:attribute-set>
+		<xsl:attribute-set name="cellWidth">
+		<xsl:attribute name="width">100mm</xsl:attribute>
+		<xsl:attribute name="border">0.3mm solid #ACACAC</xsl:attribute>
+	</xsl:attribute-set>
+		<xsl:attribute-set name="rowHeight">
+		<xsl:attribute name="height">110mm</xsl:attribute>
+	</xsl:attribute-set>
 </xsl:stylesheet>
