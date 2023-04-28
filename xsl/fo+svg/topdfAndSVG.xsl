@@ -16,6 +16,9 @@
 								<svg viewBox="-20 -20 200 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 									<desc/>
 									<defs>
+										<marker id="point" viewBox="-3 -3 16 16" refX="5" refY="5" markerWidth="4" markerHeight="4">
+											<circle cx="5" cy="5" r="5" fill="green" stroke="none"/>
+										</marker>
 										<symbol id="Axes">
 											<line x1="20" y1="0" x2="20" y2="101" stroke="black" stroke-width="2"/>
 											<polygon points="20,-1 25,5 15,5"/>
@@ -41,14 +44,15 @@
 											<stop offset="80%" stop-color="#677E52"/>
 										</linearGradient>
 									</defs>
-									
 									<xsl:variable name="maxValue" select="max(//ligneAvg)"/>
 									<xsl:variable name="ratioH" select="100 div $maxValue"/>
 									<xsl:variable name="widthBar" select="100 div count(//facture)"/>
-									 <xsl:for-each select="//facture">
-										 <xsl:variable name="height" select="ligneAvg * $ratioH"/>
-										<rect x="{7+ $ratioW * (position()-1)}" y="{100 - $height}" width="{$widthBar -5}" height="{$height}" fill="url(#effetArrondiVertical)"/>
+									<xsl:for-each select="//facture">
+										<xsl:variable name="height" select="ligneAvg * $ratioH"/>
+										<rect x="{7+ $widthBar * (position()-1)}" y="{100 - $height}" width="{$widthBar -5}" height="{$height}" fill="url(#effetArrondiVertical)"/>
 									</xsl:for-each>
+									<xsl:variable name="points"><xsl:apply-templates select="//facture" mode="pointsValues" /></xsl:variable>
+									<polyline fill="none" stroke="tomato" stroke-width="2" points="{$points}" marker-mid="url(#point)" marker-start="url(#point)" marker-end="url(#point)"/>
 									<use xlink:href="#Axes" x="-15" y="0"/>
 								</svg>
 							</fo:instream-foreign-object>
@@ -58,6 +62,11 @@
 			</fo:page-sequence>
 		</fo:root>
 	</xsl:template>
-	
-	
+	<xsl:template match="facture" mode="pointsValues">
+		<xsl:variable name="maxValue" select="max(//artAvg)"/>
+		<xsl:variable name="ratioH" select="100 div $maxValue"/>
+		<xsl:variable name="widthBar" select="100 div count(//facture)"/>
+		<xsl:value-of select="7+(position()-1)*$widthBar + (0.5*$widthBar)"/>,<xsl:value-of select="100 - $ratioH * artAvg"/>
+		<xsl:if test="position() &lt; last()"><xsl:text> </xsl:text></xsl:if>
+	</xsl:template>
 </xsl:stylesheet>
