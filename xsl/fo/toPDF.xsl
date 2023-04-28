@@ -27,7 +27,7 @@
 			<fo:table>
 				<fo:table-body>
 					<fo:table-row>
-						<xsl:apply-templates select="image"/>
+						<xsl:apply-templates select="image[position() &lt;= 2]"/>
 					</fo:table-row>
 				</fo:table-body>
 			</fo:table>
@@ -35,7 +35,7 @@
 	</xsl:template>
 	<xsl:template match="page/image">
 		<fo:table-cell>
-			<fo:block>
+			<fo:block text-align="center" padding-top="1cm">
 					<fo:external-graphic src="{@path}{@href}" content-height="4cm" content-width="4cm" scaling="uniform"/>
 			</fo:block>
 		</fo:table-cell>
